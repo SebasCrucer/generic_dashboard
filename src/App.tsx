@@ -1,34 +1,74 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect } from 'react'
 import './App.css'
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { ErrorPage } from './ErrorPage';
+import { NavbarProvider } from './contexts/Navbar.context';
+import Register from './Routes/SingIn/Register';
+import ProtectedRoute from './ProtectedRoute';
+import Login from './Routes/SingIn/Login';
+import { Home } from './Routes/Home/Home';
+import { homeLoaderData } from './Routes/Home/homeLoader';
 
-function App() {
-  const [count, setCount] = useState(0)
+const router = createBrowserRouter([
+  {
+    path: "/login/:redirect?",
+    element: (
+      <NavbarProvider>
+        <Login />
+      </NavbarProvider>
+
+    ),
+    errorElement: (
+      <NavbarProvider>
+        <ErrorPage />
+      </NavbarProvider>
+    )
+  },
+  {
+    path: "/register/:redirect?",
+    element: (
+      <NavbarProvider>
+        <Register />
+      </NavbarProvider>
+
+    ),
+    errorElement: (
+      <NavbarProvider>
+        <ErrorPage />
+      </NavbarProvider>
+    )
+  },
+  {
+    path: "/",
+    element: (
+      <NavbarProvider>
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      </NavbarProvider>
+
+    ),
+    loader: homeLoaderData,
+    errorElement: (
+      <NavbarProvider>
+        <ErrorPage />
+      </NavbarProvider>
+    )
+  }
+]);
+
+const App = () => {
+  useEffect(() => {
+    const storage_version = '1.0.0'
+    const actual_localStorage_version = localStorage.getItem('storage_version')
+    if (actual_localStorage_version !== storage_version) {
+      localStorage.clear()
+      localStorage.setItem('storage_version', storage_version)
+    }
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <RouterProvider router={router} />
   )
 }
 
