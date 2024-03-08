@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { ErrorPage } from './ErrorPage';
+import { ErrorPage } from './ErrorPage/ErrorPage';
 import { NavbarProvider } from './contexts/Navbar.context';
 import Register from './Routes/SingIn/Register';
 import ProtectedRoute from './ProtectedRoute';

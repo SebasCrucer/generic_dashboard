@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
 import { useRouteError } from "react-router-dom";
-import errorRobotLight from "./assets/error-robot.light.svg";
-import errorRobotDark from "./assets/error-robot.dark.svg";
-import { ThemeContext } from "./contexts/Theme.context";
+import errorRobotLight from "../assets/error-robot.light.svg";
+import errorRobotDark from "../assets/error-robot.dark.svg";
+import { ThemeContext } from "../contexts/Theme.context";
+import './ErrorPage.css';
 
 export const ErrorPage = () => {
     const { theme } = useContext(ThemeContext)!;

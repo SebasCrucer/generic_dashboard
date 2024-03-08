@@ -1,5 +1,6 @@
 #Login {
     width: 100%;
+    margin-inline: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -88,6 +89,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.1s ease-in-out,
+        border-color 0.1s ease-in-out,
+        color 0.1s ease-in-out;
 }
 
 .Login-form button box-icon {
@@ -114,6 +118,16 @@
     color: var(--light);
 }
 
+.Login-form button:hover {
+    background-color: var(--cooper);
+    border-color: var(--cooper);
+    color: var(--light);
+}
+
+.Login-form-remember label {
+    cursor: pointer;
+}
+
 .PasswordInput {
     width: 100%;
     display: grid;
@@ -132,4 +146,12 @@
 
 .dark .PasswordInput box-icon {
     fill: var(--light);
+}
+
+/* Estilos para escritorio */
+@media (min-width: 768px) {
+    #Login {
+        max-width: 374px;
+        margin-inline: auto;
+    }
 }

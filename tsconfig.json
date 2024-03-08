@@ -20,7 +20,11 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+      "node",
+      "prop-types",
+    ]
   },
   "include": [
     "src/**/*.ts",
@@ -30,6 +34,16 @@
     "src/**/*.js",
     "src/**/*.jsx",
     "global.d.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "public",
+    "scripts",
+    "config",
+    "vite.config"
   ],
   "references": [
     {

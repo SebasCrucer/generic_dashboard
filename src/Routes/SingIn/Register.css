@@ -88,6 +88,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.1s ease-in-out,
+        border-color 0.1s ease-in-out,
+        color 0.1s ease-in-out;
 }
 
 .Register-form button box-icon {
@@ -114,6 +117,16 @@
     color: var(--light);
 }
 
+.Register-form button:hover {
+    background-color: var(--cooper);
+    border-color: var(--cooper);
+    color: var(--light);
+}
+
+.Register-form-remember label {
+    cursor: pointer;
+}
+
 .PasswordInput {
     width: 100%;
     display: grid;
@@ -132,4 +145,12 @@
 
 .dark .PasswordInput box-icon {
     fill: var(--light);
+}
+
+/* Estilos para escritorio */
+@media (min-width: 768px) {
+    #Register {
+        max-width: 374px;
+        margin-inline: auto;
+    }
 }

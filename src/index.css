@@ -8,18 +8,28 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --dark: #242424;
-  --light: #F4F4FF;
+  --dark: rgb(36, 36, 36);
+  --light: rgb(244, 244, 255);
   /* --dark: #000000;
   --light: #ffffff; */
-  --cooper: #5271FF;
-  --shadow-light: #E4E4E4;
-  --shadow-dark: #171717;
-  --red: #FF5271;
-  --green: #00C48C;
-  --yellow: #FFB800;
+  --cooper: rgb(82, 113, 255);
+  --shadow-light: rgb(228, 228, 228);
+  --shadow-dark: rgb(23, 23, 23);
+  --red: rgb(255, 82, 113);
+  --green: rgb(0, 196, 140);
+  --yellow: rgb(255, 184, 0);
+
+  --RGB-dark: 36, 36, 36;
+  --RGB-light: 244, 244, 255;
+  --RGB-cooper: 82, 113, 255;
+  --RGB-shadow-light: 228, 228, 228;
+  --RGB-shadow-dark: 23, 23, 23;
+  --RGB-red: 255, 82, 113;
+  --RGB-green: 0, 196, 140;
+  --RGB-yellow: 255, 184, 0;
 
   --navbar-height: 4.4rem;
+  --desktop-menu-width: 220px;
 }
 
 /* Estilos para el scrollbar */
@@ -65,7 +75,8 @@ a {
 
 button {
   -webkit-tap-highlight-color: transparent;
-  font-family: unset
+  font-family: unset;
+  cursor: pointer;
 }
 
 button:focus {
@@ -102,4 +113,77 @@ button:disabled {
 .dark {
   color: var(--light);
   background-color: var(--dark);
+}
+
+.alert-info {
+  min-height: 1.5rem;
+  padding: 0.4rem 1.2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.light .alert-info {
+  color: var(--light);
+  background-color: var(--dark);
+}
+
+.dark .alert-info {
+  color: var(--dark);
+  background-color: var(--light);
+}
+
+.alert-info.no-alert {
+  background-color: unset;
+}
+
+#AppContent {
+  position: relative;
+  top: var(--navbar-height);
+  height: -webkit-fill-available;
+  overflow: scroll;
+}
+
+.rotate {
+  animation: rotation 0.5s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    overflow: unset;
+  }
+
+  #AppContainer {
+    height: calc(100vh - var(--navbar-height));
+    width: 100%;
+    position: relative;
+    top: var(--navbar-height);
+    display: grid;
+    grid-template-columns: auto;
+  }
+
+  #AppContainer.menu-visible {
+    grid-template-columns: var(--desktop-menu-width) auto;
+  }
+
+  #AppContent {
+    position: absolute;
+    transition: width 0.4s ease-in-out;
+    right: 0;
+    top: 0;
+  }
 }

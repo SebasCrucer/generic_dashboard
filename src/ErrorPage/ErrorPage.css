@@ -1,0 +1,30 @@
+#ErrorPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: -webkit-fill-available;
+}
+
+#ErrorPage h1 {
+    font-size: 30px;
+}
+
+#ErrorPage p {
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+#ErrorPage code {
+    font-size: 14px;
+    opacity: 0.5;
+    font-weight: 600;
+}
+
+#ErrorPage img {
+    width: 100px;
+    margin-top: 30px;
+    opacity: 0.6;
+}
