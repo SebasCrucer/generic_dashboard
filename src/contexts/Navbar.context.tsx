@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Nav } from "../NavMenu/Nav";
-import { Menu } from "../NavMenu/Menu";
+import { Menu, routesData } from "../NavMenu/Menu";
 import { SessionContext } from "./Session";
 import { Outlet } from "react-router-dom";
 
@@ -22,11 +22,12 @@ type navbarContext = {
     handleOpenMenu: () => void;
     onSignUp: boolean;
     onLogIn: boolean;
+    routesData: routesData[];
 } | undefined;
 
 export const NavbarContext = createContext<navbarContext>(undefined);
 
-export const NavbarProvider = () => {
+export const NavbarProvider = ({ routesData }: { routesData: routesData[] }) => {
 
     const { session } = useContext(SessionContext)!;
 
@@ -104,7 +105,8 @@ export const NavbarProvider = () => {
             handleCloseMenu,
             handleOpenMenu,
             onSignUp,
-            onLogIn
+            onLogIn,
+            routesData,
         }}>
             <Nav />
             <div id="AppContainer" className={menu.isOpen || menu.onTransition ? 'menu-visible' : ''}>

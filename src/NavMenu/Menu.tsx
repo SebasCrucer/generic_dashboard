@@ -5,11 +5,18 @@ import { Link } from 'react-router-dom';
 import './Menu.css'
 import { NavbarContext } from '../contexts/Navbar.context';
 
+export interface HomeRouteData {
+    name: string;
+}
+export interface routesData extends HomeRouteData {
+    path: string;
+}
+
 export const Menu = () => {
 
     const { theme, toggleTheme } = useContext(ThemeContext)!;
     const { session, closeSession } = useContext(SessionContext)!;
-    const { handleCloseMenu, menu, setMenu, isDesktop } = useContext(NavbarContext)!;
+    const { handleCloseMenu, menu, setMenu, isDesktop, routesData } = useContext(NavbarContext)!;
 
     return (
         <section
@@ -36,11 +43,15 @@ export const Menu = () => {
             >
                 <ul className="Menu-options">
                     <div className="Menu-top">
-                        <Link to="/">
-                            <li onClick={!isDesktop ? handleCloseMenu : undefined}>
-                                Home
-                            </li>
-                        </Link>
+                        {
+                            routesData.map((route, index) =>
+                                <Link to={route.path} key={index}>
+                                    <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                        {route.name}
+                                    </li>
+                                </Link>
+                            )
+                        }
                     </div>
                     <div className="Menu-footer">
                         {

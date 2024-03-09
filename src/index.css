@@ -61,6 +61,10 @@
   /* Cambia el color al pasar el cursor */
 }
 
+::-webkit-scrollbar-button {
+  display: none;
+}
+
 body {
   margin: 0;
   transition: background-color 0.2s ease-in-out;
@@ -146,6 +150,7 @@ button:disabled {
   top: var(--navbar-height);
   height: -webkit-fill-available;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .rotate {
