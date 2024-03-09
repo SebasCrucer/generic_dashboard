@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import './App.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from './ErrorPage/ErrorPage';
 import { NavbarProvider } from './contexts/Navbar.context';
 import Register from './Routes/SingIn/Register';
@@ -9,52 +9,51 @@ import Login from './Routes/SingIn/Login';
 import { Home } from './Routes/Home/Home';
 import { homeLoaderData } from './Routes/Home/homeLoader';
 
-const router = createBrowserRouter([
+const routes: RouteObject[] = [
   {
     path: "/login/:redirect?",
     element: (
-      <NavbarProvider>
-        <Login />
-      </NavbarProvider>
+      <Login />
 
     ),
     errorElement: (
-      <NavbarProvider>
-        <ErrorPage />
-      </NavbarProvider>
-    )
+      <ErrorPage />
+    ),
   },
   {
     path: "/register/:redirect?",
     element: (
-      <NavbarProvider>
-        <Register />
-      </NavbarProvider>
-
+      <Register />
     ),
     errorElement: (
-      <NavbarProvider>
-        <ErrorPage />
-      </NavbarProvider>
-    )
+      <ErrorPage />
+    ),
   },
   {
     path: "/",
     element: (
-      <NavbarProvider>
-        <ProtectedRoute>
-          <Home />
-        </ProtectedRoute>
-      </NavbarProvider>
-
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
     ),
     loader: homeLoaderData,
     errorElement: (
-      <NavbarProvider>
-        <ErrorPage />
-      </NavbarProvider>
-    )
-  }
+      <ErrorPage />
+    ),
+  },
+]
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <NavbarProvider />
+    ),
+    errorElement: (
+      <ErrorPage />
+    ),
+    children: routes
+  },
 ]);
 
 const App = () => {
@@ -69,6 +68,7 @@ const App = () => {
 
   return (
     <RouterProvider router={router} />
+
   )
 }
 

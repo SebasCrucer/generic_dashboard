@@ -9,18 +9,19 @@ export const Menu = () => {
 
     const { theme, toggleTheme } = useContext(ThemeContext)!;
     const { session, closeSession } = useContext(SessionContext)!;
-    const { handleCloseMenu, menu, setMenu } = useContext(NavbarContext)!;
+    const { handleCloseMenu, menu, setMenu, isDesktop } = useContext(NavbarContext)!;
 
     return (
         <section
             id="Menu"
             style={{
 
-                display: menu.isOpen ?
-                    'block' :
-                    !menu.onTransition ?
-                        'none' :
-                        'block',
+                display:
+                    menu.isOpen
+                        ? 'block'
+                        : menu.onTransition
+                            ? 'inherit'
+                            : 'none',
 
                 backdropFilter: (menu.isOpen && !menu.onTransition) ? 'blur(2px)' : 'blur(0px)',
             }}
@@ -36,8 +37,8 @@ export const Menu = () => {
                 <ul className="Menu-options">
                     <div className="Menu-top">
                         <Link to="/">
-                            <li onClick={handleCloseMenu}>
-                                Mis suscripciones
+                            <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                Home
                             </li>
                         </Link>
                     </div>

@@ -1,6 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Nav } from "../NavMenu/Nav";
 import { Menu } from "../NavMenu/Menu";
+import { SessionContext } from "./Session";
+import { Outlet } from "react-router-dom";
 
 type navbarContext = {
     location: string;
@@ -24,7 +26,9 @@ type navbarContext = {
 
 export const NavbarContext = createContext<navbarContext>(undefined);
 
-export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
+export const NavbarProvider = () => {
+
+    const { session } = useContext(SessionContext)!;
 
     const [location, setLocation] = useState('')
     const [onLogIn, setOnLogIn] = useState(false)
@@ -36,7 +40,7 @@ export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
         isOpen: boolean;
         onTransition: boolean;
     }>({
-        isOpen: isDesktop,
+        isOpen: false,
         onTransition: false
     })
 
@@ -52,7 +56,19 @@ export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [
         isDesktop,
-        setIsDesktop
+        setIsDesktop,
+    ])
+
+    useEffect(() => {
+        isDesktop ? !session ? handleCloseMenu() : handleOpenMenu() : setMenu({
+            isOpen: false,
+            onTransition: false
+        })
+    }, [
+        onLogIn,
+        onSignUp,
+        isDesktop,
+        session
     ])
 
 
@@ -73,7 +89,6 @@ export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
         setMenu({
             isOpen: false,
             onTransition: true
-
         })
     }
 
@@ -97,7 +112,7 @@ export const NavbarProvider = ({ children }: { children: React.ReactNode }) => {
                 <section id="AppContent" style={{
                     width: isDesktop && menu.isOpen ? 'calc(100% - 220px)' : '100%',
                 }}>
-                    {children}
+                    <Outlet />
                 </section>
             </div>
         </NavbarContext.Provider>
