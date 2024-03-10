@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/Theme.context';
 import { SessionContext } from '../contexts/Session';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Menu.css'
 import { NavbarContext } from '../contexts/Navbar.context';
 
@@ -48,11 +48,20 @@ export const Menu = () => {
                             <div className="Menu-top">
                                 {
                                     routesData.map((route, index) =>
-                                        <Link to={route.path} key={index}>
+                                        <NavLink
+                                            to={route.path}
+                                            key={index}
+                                            className={({ isActive, isPending }) =>
+                                                isActive
+                                                    ? "active"
+                                                    : isPending
+                                                        ? "pending"
+                                                        : ""
+                                            }>
                                             <li onClick={!isDesktop ? handleCloseMenu : undefined}>
                                                 {route.name}
                                             </li>
-                                        </Link>
+                                        </NavLink>
                                     )
                                 }
                             </div>
