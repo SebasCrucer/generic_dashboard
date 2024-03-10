@@ -67,7 +67,7 @@ export const Menu = () => {
                             </div>
                             <div className="Menu-footer">
                                 <>
-                                    <li>
+                                    <li className='no-action'>
                                         <p>{session.email}</p>
                                     </li>
                                     <li onClick={toggleTheme}>

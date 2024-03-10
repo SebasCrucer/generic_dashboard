@@ -81,9 +81,18 @@
     margin-block: 0.4rem;
 }
 
-.Menu-options .Menu-footer li:nth-child(1) {
+.Menu-footer li:nth-child(1) {
     margin-bottom: 1rem;
     height: unset;
+}
+
+.Menu-footer li.no-action {
+    cursor: default;
+}
+
+.Menu-footer li.no-action:hover {
+    filter: brightness(1);
+    background-color: var(--shadow-dark);
 }
 
 .Menu-close {
