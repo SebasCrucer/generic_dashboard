@@ -42,42 +42,44 @@ export const Menu = () => {
                 }}
             >
                 <ul className="Menu-options">
-                    <div className="Menu-top">
-                        {
-                            routesData.map((route, index) =>
-                                <Link to={route.path} key={index}>
-                                    <li onClick={!isDesktop ? handleCloseMenu : undefined}>
-                                        {route.name}
+                    {
+                        session &&
+                        <>
+                            <div className="Menu-top">
+                                {
+                                    routesData.map((route, index) =>
+                                        <Link to={route.path} key={index}>
+                                            <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                                {route.name}
+                                            </li>
+                                        </Link>
+                                    )
+                                }
+                            </div>
+                            <div className="Menu-footer">
+                                <>
+                                    <li>
+                                        <p>{session.email}</p>
                                     </li>
-                                </Link>
-                            )
-                        }
-                    </div>
-                    <div className="Menu-footer">
-                        {
-                            session &&
-                            <>
-                                <li>
-                                    <p>{session.email}</p>
-                                </li>
-                                <li onClick={toggleTheme}>
-                                    <p>Tema</p>
-                                    {
-                                        theme === 'light'
-                                            ?
-                                            <box-icon name='moon' type='solid' />
-                                            :
-                                            <box-icon name='sun' />
-                                    }
-                                </li>
-                                <li onClick={() => { handleCloseMenu(); closeSession() }}>
-                                    <p>Cerrar sesión</p>
-                                    <box-icon name='log-out' rotate='180' />
-                                </li>
-                            </>
+                                    <li onClick={toggleTheme}>
+                                        <p>Tema</p>
+                                        {
+                                            theme === 'light'
+                                                ?
+                                                <box-icon name='moon' type='solid' />
+                                                :
+                                                <box-icon name='sun' />
+                                        }
+                                    </li>
+                                    <li onClick={() => { handleCloseMenu(); closeSession() }}>
+                                        <p>Cerrar sesión</p>
+                                        <box-icon name='log-out' rotate='180' />
+                                    </li>
+                                </>
 
-                        }
-                    </div>
+                            </div>
+                        </>
+                    }
                 </ul>
                 <div className="Menu-close" onClick={handleCloseMenu}>
                 </div>
