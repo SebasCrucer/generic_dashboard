@@ -1,99 +1,14 @@
 import { useEffect } from 'react'
-import './App.css'
 import { Outlet, RouteObject, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from './ErrorPage/ErrorPage';
 import { NavbarProvider } from './contexts/Navbar.context';
 import Register from './Routes/SingIn/Register';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Routes/SingIn/Login';
-import { Home } from './Routes/Home/Home';
 import { homeLoaderData } from './Routes/Home/homeLoader';
-import { HomeRouteData } from './NavMenu/Menu';
+import { HomeRoutes } from './HomeRoutes';
 
-
-
-interface HomeRoute {
-  data: HomeRouteData;
-  routeObject: RouteObject;
-}
-
-const homeChildren: HomeRoute[] = [
-  {
-    data: {
-      name: 'Home'
-    },
-    routeObject: {
-      path: '/',
-      element: (
-        <Home />
-      ),
-      loader: homeLoaderData,
-      errorElement: (
-        <ErrorPage />
-      )
-    }
-  },
-  {
-    data: {
-      name: 'Page 1'
-    },
-    routeObject: {
-      path: '/page1',
-      element: (
-        <div>Page 1</div>
-      ),
-      // loader: homeLoaderData,
-      errorElement: (
-        <ErrorPage />
-      )
-    }
-  },
-  {
-    data: {
-      name: 'Page 2'
-    },
-    routeObject: {
-      path: '/page2',
-      element: (
-        <div>Page 2</div>
-      ),
-      // loader: homeLoaderData,
-      errorElement: (
-        <ErrorPage />
-      )
-    }
-  },
-  {
-    data: {
-      name: 'Page 3'
-    },
-    routeObject: {
-      path: '/page3',
-      element: (
-        <div>Page 3</div>
-      ),
-      // loader: homeLoaderData,
-      errorElement: (
-        <ErrorPage />
-      )
-    }
-  },
-  {
-    data: {
-      name: 'Page 4'
-    },
-    routeObject: {
-      path: '/page4',
-      element: (
-        <div>Page 4</div>
-      ),
-      // loader: homeLoaderData,
-      errorElement: (
-        <ErrorPage />
-      )
-    }
-  },
-];
+import './App.css'
 
 const RouteObjects: RouteObject[] = [
   {
@@ -126,7 +41,9 @@ const RouteObjects: RouteObject[] = [
     errorElement: (
       <ErrorPage />
     ),
-    children: homeChildren.map((child) => child.routeObject)
+    children: HomeRoutes.map((child) => ({
+      ...child.routeObject
+    }))
   }
 ]
 
@@ -135,7 +52,7 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <NavbarProvider
-        routesData={homeChildren.map((child) => ({ ...child.data, path: child.routeObject.path as string }))}
+        routesData={HomeRoutes.map((child) => ({ ...child.data, path: child.routeObject.path as string }))}
       />
     ),
     errorElement: (

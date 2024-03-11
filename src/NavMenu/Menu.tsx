@@ -1,9 +1,10 @@
 import { useContext } from 'react'
 import { ThemeContext } from '../contexts/Theme.context';
 import { SessionContext } from '../contexts/Session';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './Menu.css'
 import { NavbarContext } from '../contexts/Navbar.context';
+import { getSameLevelRoutes } from '../Utils/navigation';
 
 export interface HomeRouteData {
     name: string;
@@ -17,6 +18,8 @@ export const Menu = () => {
     const { theme, toggleTheme } = useContext(ThemeContext)!;
     const { session, closeSession } = useContext(SessionContext)!;
     const { handleCloseMenu, menu, setMenu, isDesktop, routesData } = useContext(NavbarContext)!;
+    const pathLocation = useLocation()
+
 
     return (
         <section
@@ -47,7 +50,7 @@ export const Menu = () => {
                         <>
                             <div className="Menu-top">
                                 {
-                                    routesData.map((route, index) =>
+                                    getSameLevelRoutes(pathLocation.pathname, routesData).map((route, index) =>
                                         <NavLink
                                             to={route.path}
                                             key={index}
@@ -66,26 +69,23 @@ export const Menu = () => {
                                 }
                             </div>
                             <div className="Menu-footer">
-                                <>
-                                    <li className='no-action'>
-                                        <p>{session.email}</p>
-                                    </li>
-                                    <li onClick={toggleTheme}>
-                                        <p>Tema</p>
-                                        {
-                                            theme === 'light'
-                                                ?
-                                                <box-icon name='moon' type='solid' />
-                                                :
-                                                <box-icon name='sun' />
-                                        }
-                                    </li>
-                                    <li onClick={() => { handleCloseMenu(); closeSession() }}>
-                                        <p>Cerrar sesión</p>
-                                        <box-icon name='log-out' rotate='180' />
-                                    </li>
-                                </>
-
+                                <li className='no-action'>
+                                    <p>{session.email}</p>
+                                </li>
+                                <li onClick={toggleTheme}>
+                                    <p>Tema</p>
+                                    {
+                                        theme === 'light'
+                                            ?
+                                            <box-icon name='moon' type='solid' />
+                                            :
+                                            <box-icon name='sun' />
+                                    }
+                                </li>
+                                <li onClick={() => { handleCloseMenu(); closeSession() }}>
+                                    <p>Cerrar sesión</p>
+                                    <box-icon name='log-out' rotate='180' />
+                                </li>
                             </div>
                         </>
                     }

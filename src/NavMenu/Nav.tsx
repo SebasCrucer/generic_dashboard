@@ -1,15 +1,25 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { SessionContext } from "../contexts/Session";
 import menuIcon from '../assets/menu.svg'
 import './Nav.css'
 import { NavbarContext } from '../contexts/Navbar.context';
+import { getPathNamesFromText } from '../Utils/navigation';
 
 export const Nav = () => {
 
     const { session, sessionLoading } = useContext(SessionContext)!;
-    const { location, handleCloseMenu, handleOpenMenu, menu, onLogIn, onSignUp } = useContext(NavbarContext)!;
+    const { handleCloseMenu, handleOpenMenu, menu, onLogIn, onSignUp, routesData } = useContext(NavbarContext)!;
     const pathLocation = useLocation()
+
+    const [routeNames, setRouteNames] = useState(getPathNamesFromText(pathLocation.pathname, routesData))
+
+    useEffect(() => {
+        setRouteNames(getPathNamesFromText(pathLocation.pathname, routesData))
+
+    }, [pathLocation.pathname, routesData])
+
+
 
     return (
         <nav className="navBar">
@@ -29,7 +39,17 @@ export const Nav = () => {
                         } />
                         <div>
                             <img src="/logo.svg" alt="logo" />
-                            <h1>{location}</h1>
+                            <ul>
+                                {
+                                    routeNames.map((route, index) =>
+                                        <li key={index}>
+                                            <Link to={route.path}>
+                                                {route.name}
+                                            </Link>
+                                        </li>
+                                    )
+                                }
+                            </ul>
                         </div>
                     </>
                 }

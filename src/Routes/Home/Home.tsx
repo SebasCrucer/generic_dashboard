@@ -1,5 +1,3 @@
-import { useContext, useEffect } from 'react';
-import { NavbarContext } from '../../contexts/Navbar.context';
 import { useLoaderData, useNavigation } from 'react-router-dom';
 import './Home.css'
 import { homeLoaderData } from './homeLoader';
@@ -8,12 +6,6 @@ export const Home = () => {
 
     const homeData = useLoaderData() as homeLoaderData;
     const { state } = useNavigation()
-
-    const { setLocation } = useContext(NavbarContext)!;
-
-    useEffect(() => {
-        setLocation('');
-    }, [setLocation]);
 
     return (
         <section id='Home' style={{

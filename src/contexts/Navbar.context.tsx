@@ -5,8 +5,6 @@ import { SessionContext } from "./Session";
 import { Outlet } from "react-router-dom";
 
 type navbarContext = {
-    location: string;
-    setLocation: (location: string) => void;
     setOnLogIn: (onLogIn: boolean) => void;
     setOnSignUp: (onSignUp: boolean) => void;
     isDesktop: boolean;
@@ -31,7 +29,6 @@ export const NavbarProvider = ({ routesData }: { routesData: routesData[] }) => 
 
     const { session } = useContext(SessionContext)!;
 
-    const [location, setLocation] = useState('')
     const [onLogIn, setOnLogIn] = useState(false)
     const [onSignUp, setOnSignUp] = useState(false)
 
@@ -95,8 +92,6 @@ export const NavbarProvider = ({ routesData }: { routesData: routesData[] }) => 
 
     return (
         <NavbarContext.Provider value={{
-            location,
-            setLocation,
             setOnLogIn,
             setOnSignUp,
             isDesktop,
