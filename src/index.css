@@ -109,6 +109,14 @@ button:disabled {
   opacity: 0.5 !important;
 }
 
+.light box-icon {
+  fill: var(--light);
+}
+
+.dark box-icon {
+  fill: var(--dark);
+}
+
 .light {
   color: var(--dark);
   background-color: var(--light);

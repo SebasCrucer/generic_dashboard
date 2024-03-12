@@ -4,7 +4,7 @@ import { SessionContext } from '../contexts/Session';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Menu.css'
 import { NavbarContext } from '../contexts/Navbar.context';
-import { getSameLevelRoutes } from '../Utils/navigation';
+import { getSiblingRoutes } from '../Utils/navigation';
 
 export interface HomeRouteData {
     name: string;
@@ -19,7 +19,6 @@ export const Menu = () => {
     const { session, closeSession } = useContext(SessionContext)!;
     const { handleCloseMenu, menu, setMenu, isDesktop, routesData } = useContext(NavbarContext)!;
     const pathLocation = useLocation()
-
 
     return (
         <section
@@ -50,21 +49,43 @@ export const Menu = () => {
                         <>
                             <div className="Menu-top">
                                 {
-                                    getSameLevelRoutes(pathLocation.pathname, routesData).map((route, index) =>
-                                        <NavLink
-                                            to={route.path}
-                                            key={index}
-                                            className={({ isActive, isPending }) =>
-                                                isActive
-                                                    ? "active"
-                                                    : isPending
-                                                        ? "pending"
-                                                        : ""
+                                    getSiblingRoutes(pathLocation.pathname, routesData).map((route, index) =>
+                                        <div className='Menu-op' key={index}>
+                                            <NavLink
+                                                to={route.path}
+                                                className={({ isActive, isPending }) =>
+                                                    isActive
+                                                        ? "active"
+                                                        : isPending
+                                                            ? "pending"
+                                                            : ""
+                                                }>
+                                                <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                                    {route.name}
+                                                </li>
+                                            </NavLink>
+                                            <ul className={'Menu-subOp ' + (route.path === pathLocation.pathname ? ' open' : 'close')
                                             }>
-                                            <li onClick={!isDesktop ? handleCloseMenu : undefined}>
-                                                {route.name}
-                                            </li>
-                                        </NavLink>
+                                                {
+                                                    routesData.filter(r => r.path.startsWith(route.path + '/')).map((childRoute, index) =>
+                                                        <NavLink
+                                                            to={childRoute.path}
+                                                            key={index}
+                                                            className={({ isActive, isPending }) =>
+                                                                isActive
+                                                                    ? "active"
+                                                                    : isPending
+                                                                        ? "pending"
+                                                                        : ""
+                                                            }>
+                                                            <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                                                {childRoute.name}
+                                                            </li>
+                                                        </NavLink>
+                                                    )
+                                                }
+                                            </ul>
+                                        </div>
                                     )
                                 }
                             </div>

@@ -13,6 +13,21 @@ interface HomeRoute {
 export const HomeRoutes: HomeRoute[] = [
     {
         data: {
+            name: 'root'
+        },
+        routeObject: {
+            path: '/',
+            element: (
+                <div>root</div>
+            ),
+            loader: homeLoaderData,
+            errorElement: (
+                <ErrorPage />
+            )
+        }
+    },
+    {
+        data: {
             name: 'Home'
         },
         routeObject: {
@@ -34,6 +49,21 @@ export const HomeRoutes: HomeRoute[] = [
             path: '/home/1',
             element: (
                 <div>Home/1</div>
+
+            ),
+            errorElement: (
+                <ErrorPage />
+            )
+        }
+    },
+    {
+        data: {
+            name: 'Home/2'
+        },
+        routeObject: {
+            path: '/home/2',
+            element: (
+                <div>Home/2</div>
 
             ),
             errorElement: (

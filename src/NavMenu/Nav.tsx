@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { Fragment, useContext, useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { SessionContext } from "../contexts/Session";
 import menuIcon from '../assets/menu.svg'
@@ -39,14 +39,25 @@ export const Nav = () => {
                         } />
                         <div>
                             <img src="/logo.svg" alt="logo" />
-                            <ul>
+                            <ul className='navBar-routes'>
                                 {
-                                    routeNames.map((route, index) =>
-                                        <li key={index}>
-                                            <Link to={route.path}>
-                                                {route.name}
-                                            </Link>
-                                        </li>
+                                    routeNames.map((route, index) => (
+                                        <Fragment key={index}>
+                                            {
+                                                index !== 0 &&
+                                                <box-icon name='chevron-left' ></box-icon>
+                                            }
+                                            {
+                                                pathLocation.pathname === route.path ?
+                                                    <li>{route.name}</li> :
+                                                    <Link to={route.path}>
+                                                        <li>
+                                                            {route.name}
+                                                        </li>
+                                                    </Link>
+                                            }
+                                        </Fragment>
+                                    )
                                     )
                                 }
                             </ul>

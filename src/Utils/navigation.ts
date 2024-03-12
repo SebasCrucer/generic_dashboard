@@ -17,13 +17,28 @@ export const getPathNamesFromText = (targetPath: string, routesJson: routesData[
     return pathsAndNames;
 };
 
-export const getSameLevelRoutes = (currentPath: string, routesJson: routesData[]): routesData[] => {
-    const currentLevel = currentPath.split('/').length - 1;
+export const getParentRoute = (currentPath: string, routesJson: routesData[]): routesData | null => {
+    if (!currentPath.startsWith('/')) {
+        currentPath = '/' + currentPath;
+    }
+    const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/')) || '/';
 
-    const sameLevelRoutes = routesJson.filter(route => {
-        const routeLevel = route.path.split('/').length - 1;
-        return routeLevel === currentLevel;
+    // Encuentra y devuelve la ruta padre si existe
+    const parentRoute = routesJson.find(route => route.path === parentPath);
+    return parentRoute || null;
+};
+
+export const getSiblingRoutes = (currentPath: string, routesJson: routesData[]): routesData[] => {
+    if (!currentPath.startsWith('/')) {
+        currentPath = '/' + currentPath;
+    }
+    const parentPath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+
+    // Filtrar para encontrar todas las rutas hermanas, excluyendo la ruta actual
+    const siblingRoutes = routesJson.filter(route => {
+        const routeParentPath = route.path.substring(0, route.path.lastIndexOf('/'));
+        return routeParentPath === parentPath;
     });
 
-    return sameLevelRoutes;
+    return siblingRoutes;
 };

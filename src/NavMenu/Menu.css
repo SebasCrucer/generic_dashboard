@@ -120,6 +120,44 @@
     height: 100%;
 }
 
+.Menu-op {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.Menu-subOp {
+    transition: max-height 0.4s ease-in-out;
+    overflow: hidden;
+    margin-inline-start: 16px;
+    text-align: start;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.Menu-subOp.open {
+    max-height: 120px;
+}
+
+.Menu-subOp.close {
+    max-height: 0px;
+}
+
+.Menu-subOp li {
+    background-color: transparent;
+    height: unset;
+    font-size: 13px;
+    background-color: rgba(var(--RGB-dark), 0);
+    border-radius: 12px;
+}
+
+.Menu-subOp li:hover {
+    filter: brightness(1.1);
+    background-color: rgba(var(--RGB-dark), 0.6);
+}
+
 @media (min-width: 768px) {
     #Menu {
         width: var(--desktop-menu-width);
