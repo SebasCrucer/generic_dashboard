@@ -49,7 +49,7 @@
 }
 
 .navBar>div:nth-child(1)>div {
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .navBar div:nth-child(2) p {
@@ -75,8 +75,9 @@
 
 .navBar-routes {
     display: flex;
-    gap: 1rem;
+    gap: 0.3rem;
     align-items: center;
+    padding: 0;
 }
 
 .navBar-routes li {
@@ -86,40 +87,37 @@
     font-weight: 600;
     font-size: 13px;
     background-color: transparent;
-    border: 1px solid rgba(var(--RGB-shadow-light), 0.2);
-    color: rgba(var(--RGB-shadow-light), 0.5);
     transition: background-color 0.1s ease-in-out, border 0.1s ease-in-out, filter 0.1s ease-in-out, color 0.1s ease-in-out;
     cursor: pointer;
 }
 
-.navBar-routes li:hover {
+.light .navBar-routes a>li {
+    border: 1px solid rgba(var(--RGB-shadow-dark), 0.2);
+    color: rgba(var(--RGB-shadow-dark), 0.5);
+}
+
+.dark .navBar-routes a>li {
+    border: 1px solid rgba(var(--RGB-shadow-light), 0.2);
+    color: rgba(var(--RGB-shadow-light), 0.5);
+}
+
+.navBar-routes a>li:hover {
     background-color: rgba(var(--RGB-cooper), 0.1);
     color: rgba(var(--RGB-cooper));
-    border: 1px solid rgba(var(--RGB-cooper));
+    border: 1px solid rgba(var(--RGB-cooper), 0.2);
 }
 
-.dark .navBar-routes>li {
-    cursor: default;
+.navBar-routes>li {
     color: rgba(var(--RGB-cooper), 0.8);
     border: 1px solid rgba(var(--RGB-cooper), 0.2);
 }
 
-.dark .navBar-routes>li:hover {
+.navBar-routes>li:hover {
     color: rgba(var(--RGB-cooper), 0.8);
     border: 1px solid rgba(var(--RGB-cooper), 0.2);
     background-color: transparent;
 }
 
-.light .navBar-routes>li {
-    border: 1px solid rgba(var(--RGB-shadow-dark), 0.2);
-    cursor: default;
-    color: rgba(var(--RGB-shadow-dark), 0.6);
-}
-
-.light .navBar-routes>li:hover {
-    background-color: transparent;
-    border: 1px solid rgba(var(--RGB-shadow-dark), 0.2);
-}
 
 .light .navBar-routes box-icon {
     fill: rgba(var(--RGB-shadow-dark), 0.4);
