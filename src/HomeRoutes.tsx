@@ -18,21 +18,6 @@ export const HomeRoutes: HomeRoute[] = [
         routeObject: {
             path: '/',
             element: (
-                <div>root</div>
-            ),
-            loader: homeLoaderData,
-            errorElement: (
-                <ErrorPage />
-            )
-        }
-    },
-    {
-        data: {
-            name: 'Home'
-        },
-        routeObject: {
-            path: '/home',
-            element: (
                 <Home />
             ),
             loader: homeLoaderData,
@@ -43,12 +28,27 @@ export const HomeRoutes: HomeRoute[] = [
     },
     {
         data: {
-            name: 'Home/1'
+            name: 'Page 0'
         },
         routeObject: {
-            path: '/home/1',
+            path: '/page0',
             element: (
-                <div>Home/1</div>
+                <div>Page 0</div>
+            ),
+            loader: homeLoaderData,
+            errorElement: (
+                <ErrorPage />
+            )
+        }
+    },
+    {
+        data: {
+            name: 'page0/1'
+        },
+        routeObject: {
+            path: '/page0/1',
+            element: (
+                <div>page0/1</div>
 
             ),
             errorElement: (
@@ -58,12 +58,27 @@ export const HomeRoutes: HomeRoute[] = [
     },
     {
         data: {
-            name: 'Home/2'
+            name: 'page0/2'
         },
         routeObject: {
-            path: '/home/2',
+            path: '/page0/2',
             element: (
-                <div>Home/2</div>
+                <div>page0/2</div>
+
+            ),
+            errorElement: (
+                <ErrorPage />
+            )
+        }
+    },
+    {
+        data: {
+            name: 'page0/2/1'
+        },
+        routeObject: {
+            path: '/page0/2/1',
+            element: (
+                <div>page0/2</div>
 
             ),
             errorElement: (

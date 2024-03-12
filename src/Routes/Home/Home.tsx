@@ -8,9 +8,7 @@ export const Home = () => {
     const { state } = useNavigation()
 
     return (
-        <section id='Home' style={{
-            opacity: state === 'loading' ? 0.5 : 1
-        }}>
+        <section id='Home' className={state === 'loading' ? 'page-loading' : ''}>
             <div className='Home-container'>
                 <div className='Home-data'>
                     {

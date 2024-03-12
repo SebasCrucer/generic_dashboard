@@ -106,9 +106,9 @@ export const NavbarProvider = ({ routesData }: { routesData: routesData[] }) => 
             <Nav />
             <div id="AppContainer" className={menu.isOpen || menu.onTransition ? 'menu-visible' : ''}>
                 <Menu />
-                <section id="AppContent" style={{
-                    width: isDesktop && menu.isOpen ? 'calc(100% - 220px)' : '100%',
-                }}>
+                <section id="AppContent"
+                    className={menu.isOpen ? 'menu-visible' : 'menu-hidden'}
+                >
                     <Outlet />
                 </section>
             </div>

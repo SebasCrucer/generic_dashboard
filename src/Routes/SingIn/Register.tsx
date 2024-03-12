@@ -57,9 +57,7 @@ export default function Register() {
         return null;
     } else {
         return (
-            <section id='Register' style={{
-                opacity: (state === 'loading' || state === 'submitting') ? 0.5 : 1
-            }}>
+            <section id='Register' className={state === 'loading' ? 'page-loading' : ''}>
                 <img
                     src="/logo.svg"
                     alt="logo"

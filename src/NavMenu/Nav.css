@@ -87,7 +87,10 @@
     font-weight: 600;
     font-size: 13px;
     background-color: transparent;
-    transition: background-color 0.1s ease-in-out, border 0.1s ease-in-out, filter 0.1s ease-in-out, color 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out,
+        border 0.1s ease-in-out,
+        filter 0.1s ease-in-out,
+        color 0.1s ease-in-out;
     cursor: pointer;
 }
 
@@ -116,6 +119,7 @@
     color: rgba(var(--RGB-cooper), 0.8);
     border: 1px solid rgba(var(--RGB-cooper), 0.2);
     background-color: transparent;
+    cursor: default;
 }
 
 

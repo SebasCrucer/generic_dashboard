@@ -1,10 +1,10 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../contexts/Theme.context';
 import { SessionContext } from '../contexts/Session';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Menu.css'
 import { NavbarContext } from '../contexts/Navbar.context';
-import { getSiblingRoutes } from '../Utils/navigation';
+import { getChildRoutes, getSiblingRoutes, hasChildRoutes } from '../Utils/navigation';
 
 export interface HomeRouteData {
     name: string;
@@ -19,6 +19,19 @@ export const Menu = () => {
     const { session, closeSession } = useContext(SessionContext)!;
     const { handleCloseMenu, menu, setMenu, isDesktop, routesData } = useContext(NavbarContext)!;
     const pathLocation = useLocation()
+
+    const [menuRoutes, setMenuRoutes] = useState<routesData[] | undefined>()
+
+    useEffect(() => {
+        const path = pathLocation.pathname.endsWith('/') && pathLocation.pathname !== '/' ? pathLocation.pathname.slice(0, -1) : pathLocation.pathname;
+
+        if (hasChildRoutes(path, routesData)) {
+            setMenuRoutes(getSiblingRoutes(path, routesData))
+        } else {
+            const parentRoute = path.substring(0, path.lastIndexOf('/'))
+            setMenuRoutes(getSiblingRoutes(parentRoute, routesData))
+        }
+    }, [pathLocation.pathname, routesData])
 
     return (
         <section
@@ -49,7 +62,7 @@ export const Menu = () => {
                         <>
                             <div className="Menu-top">
                                 {
-                                    getSiblingRoutes(pathLocation.pathname, routesData).map((route, index) =>
+                                    menuRoutes && menuRoutes.map((route, index) =>
                                         <div className='Menu-op' key={index}>
                                             <NavLink
                                                 to={route.path}
@@ -64,10 +77,10 @@ export const Menu = () => {
                                                     {route.name}
                                                 </li>
                                             </NavLink>
-                                            <ul className={'Menu-subOp ' + (route.path === pathLocation.pathname ? ' open' : 'close')
+                                            <ul className={'Menu-subOp ' + (route.path !== '/' ? route.path === pathLocation.pathname || (pathLocation.pathname.startsWith(route.path)) ? ' open' : 'close' : 'close')
                                             }>
                                                 {
-                                                    routesData.filter(r => r.path.startsWith(route.path + '/')).map((childRoute, index) =>
+                                                    getChildRoutes(route.path, routesData).map((childRoute, index) =>
                                                         <NavLink
                                                             to={childRoute.path}
                                                             key={index}

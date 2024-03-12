@@ -55,9 +55,7 @@ export default function Login() {
         return null;
     } else {
         return (
-            <section id='Login' style={{
-                opacity: (state === 'loading' || state === 'submitting') ? 0.5 : 1
-            }}>
+            <section id='Login' className={state === 'loading' ? 'page-loading' : ''}>
                 <img
                     src="/logo.svg"
                     alt="logo"
