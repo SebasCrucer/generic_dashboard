@@ -67,7 +67,7 @@ export const Menu = () => {
                                             <NavLink
                                                 to={route.path}
                                                 className={({ isActive, isPending }) =>
-                                                    isActive
+                                                    pathLocation.pathname === route.path && isActive
                                                         ? "active"
                                                         : isPending
                                                             ? "pending"
@@ -85,7 +85,7 @@ export const Menu = () => {
                                                             to={childRoute.path}
                                                             key={index}
                                                             className={({ isActive, isPending }) =>
-                                                                isActive
+                                                                pathLocation.pathname === childRoute.path && isActive
                                                                     ? "active"
                                                                     : isPending
                                                                         ? "pending"
