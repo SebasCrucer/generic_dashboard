@@ -9,7 +9,7 @@ import { getPathNamesFromText } from '../Utils/navigation';
 export const Nav = () => {
 
     const { session, sessionLoading } = useContext(SessionContext)!;
-    const { handleCloseMenu, handleOpenMenu, menu, onLogIn, onSignUp, routesData } = useContext(NavbarContext)!;
+    const { handleCloseMenu, handleOpenMenu, menu, onLogIn, onSignUp, routesData, isDesktop } = useContext(NavbarContext)!;
     const pathLocation = useLocation()
 
     const [routeNames, setRouteNames] = useState(getPathNamesFromText(pathLocation.pathname, routesData))
@@ -41,7 +41,7 @@ export const Nav = () => {
                             <img src="/logo.svg" alt="logo" />
                             <ul className='navBar-routes'>
                                 {
-                                    routeNames.map((route, index) => (
+                                    routeNames.slice(isDesktop ? 0 : routeNames.length - 2, routeNames.length).map((route, index) => (
                                         <Fragment key={index}>
                                             {
                                                 index !== 0 &&
