@@ -33,6 +33,11 @@ export const Menu = () => {
         }
     }, [pathLocation.pathname, routesData])
 
+    const handleLiClick = () => !isDesktop
+        // ? handleCloseMenu
+        ? undefined
+        : undefined
+
     return (
         <section
             id="Menu"
@@ -73,7 +78,9 @@ export const Menu = () => {
                                                             ? "pending"
                                                             : ""
                                                 }>
-                                                <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                                <li
+                                                    onClick={handleLiClick}
+                                                >
                                                     {route.name}
                                                 </li>
                                             </NavLink>
@@ -91,7 +98,9 @@ export const Menu = () => {
                                                                         ? "pending"
                                                                         : ""
                                                             }>
-                                                            <li onClick={!isDesktop ? handleCloseMenu : undefined}>
+                                                            <li
+                                                                onClick={handleLiClick}
+                                                            >
                                                                 {childRoute.name}
                                                             </li>
                                                         </NavLink>
