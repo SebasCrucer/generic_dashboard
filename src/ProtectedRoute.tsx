@@ -9,7 +9,6 @@ export default function ProtectedRoute({ children }: { children: React.ReactNode
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log('ProtectedRoute', session);
         if (!session?.sessionId) {
             const redirect = encodeURIComponent(location.pathname + location.search)
             navigate('/login?redirect=' + redirect);

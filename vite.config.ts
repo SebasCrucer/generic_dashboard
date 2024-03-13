@@ -5,7 +5,6 @@ export default defineConfig(() => {
   const env = loadEnv("mock", process.cwd(), "");
   const processEnvValues = {
     "process.env": Object.entries(env).reduce((prev, [key, val]) => {
-      // console.log(key, val);
       return {
         ...prev,
         [key]: val,
